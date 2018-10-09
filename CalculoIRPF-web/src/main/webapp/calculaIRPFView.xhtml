@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Calcule seu IRPF</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+                <p:panel id="panel" header="Preencha seus dados e calcule o seu IRPF" style="margin-bottom:10px;">
+                    <h:panelGrid columns="1" cellpadding="1" style="display: inline-table" >
+                        <h:outputLabel for="inputRendimento" value="Rendimento:"/>
+                        <p:inputNumber id="inputRendimento" required="true" value="#{calculaIRPF.inputRendimento}"/>
+
+                        <h:outputLabel for="inputNumeroDependentes" value="Número de Dependentes:"/>
+                        <p:inputNumber id="inputNumeroDependentes" required="true" value="#{calculaIRPF.inputNumeroDependentes}"/>
+
+                        <h:outputLabel for="inputOutrosDescontos" value="Outras deduções:"/>
+                        <p:inputNumber id="inputOutrosDescontos" required="true" value="#{calculaIRPF.inputOutrosDescontos}"/> 
+
+                        <p:commandButton value="Calcular IRPF" action="#{calculaIRPF.onClickCalcularIRPFButton()}" update="inputValorIRPF inputValorIRPFAnual inputValorRestituicao inputValorRestituicaoAnual">
+                            <p:ajax update="inputValorIRPF" />
+                            <p:ajax update="inputValorIRPFAnual" />
+                        </p:commandButton>
+
+                        <p:commandButton value="Limpar" style="display: inline-table" action="#{calculaIRPF.onClickLimparButton()}" update="inputValorIRPF inputValorIRPFAnual inputValorRestituicao inputValorRestituicaoAnual">
+                            <p:ajax update="inputValorIRPF" />
+                            <p:ajax update="inputValorIRPFAnual" />
+                        </p:commandButton>
+
+                        <h:outputLabel for="inputValorRestituicao" value="Valor Restituição Mensal:"/>
+                        <p:inputNumber id="inputValorRestituicao" required="false" value="#{calculaIRPF.inputValorRestituicao}" disabled="false"/>
+
+                        <h:outputLabel for="inputValorRestituicaoAnual" value="Valor Restituicao Anual:"/>
+                        <p:inputNumber id="inputValorRestituicaoAnual" required="false" value="#{calculaIRPF.inputValorRestituicaoAnual}" disabled="false"/>
+
+                        <h:outputLabel for="inputValorIRPF" value="Valor IRPF Mensal:" style="display: inline-table"/>
+                        <p:inputNumber id="inputValorIRPF" required="false" value="#{calculaIRPF.inputValorIRPF}" disabled="false"/>
+
+                        <h:outputLabel for="inputValorIRPFAnual" value="Valor IRPF Anual:" style="display: inline-table"/>
+                        <p:inputNumber id="inputValorIRPFAnual" required="false" value="#{calculaIRPF.inputValorIRPFAnual}" disabled="false"/>
+
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+        </h:body>
+
+    </f:view>
+</html>
+
